@@ -76,8 +76,8 @@ const game = () => {
       }
       playerScore.textContent = `Player Score: ${playerScoreCounter}`;
       computerScore.textContent = `Computer Score: ${computerScoreCounter}`;
-      display.innerHTML = `<img src="asets/images/${computerSelection}.png" alt="${computerSelection}" class="select"/>`;
-      counter.innerHTML = `<img src="asets/images/${playerSelection}.png" alt="${playerSelection}" class="select" />`;
+      display.innerHTML = `<img src="./asets/images/${computerSelection}.png" alt="${computerSelection}" class="select"/>`;
+      counter.innerHTML = `<img src="./asets/images/${playerSelection}.png" alt="${playerSelection}" class="select" />`;
       result.textContent = `${playerScoreCounter} - ${computerScoreCounter}`;
       if (roundCounter === 5) {
         showButton();

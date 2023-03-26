@@ -2,7 +2,7 @@
 
 <div align="center">
   <!-- You are encouraged to replace this logo with your own! Otherwise you can also remove it. -->
-  <img src="logo.png" alt="logo" width="340"  height="auto" />
+  <img src="./asets/images/logo.png" alt="logo" width="340"  height="auto" />
   <br/>
 
   <h3><b>Rock, Scisors, Paper</b></h3>

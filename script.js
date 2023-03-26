@@ -3,126 +3,107 @@ const display = document.getElementById("display");
 const rock = document.getElementById("rock");
 const scisors = document.getElementById("scisors");
 const paper = document.getElementById("paper");
-const getRandom = (min, max) => {
-  return Math.floor((Math.random()*(max - min + 1)) + min)
-};
-let compupter = (comp) => {
-  switch(comp){
-    case 1:
-      counter.innerHTML = `
-      <div class="computer">
-      <img src="./asets/images/paper.png">
-      </div>
-      `;
-      compupter_score = 1;
-      break;
-    case 2:
-      counter.innerHTML = `
-      <div class="computer">
-      <img src="./asets/images/scisors.png">
-      </div>
-      `;
-      computer_score = 2;
-      break;
-    case 3:
-      counter.innerHTML = `
-      <div class="computer">
-      <img src="./asets/images/rock.png">
-      </div>
-      `;
-      compupter_score = 3;
-      break;
-  };
+const playerScore = document.getElementById("playerScore");
+const computerScore = document.getElementById("computerScore");
+const round = document.getElementById("round");
+const result = document.getElementById("result");
+const reset = document.getElementById("reset");
+
+let computerScoreCounter = 0;
+let playerScoreCounter = 0;
+let roundCounter = 0;
+
+const computerSelection = ["rock", "scisors", "paper"];
+
+const item = [
+  { id: "rock", value: rock },
+  { id: "scisors", value: scisors },
+  { id: "paper", value: paper }
+];
+
+
+const disableButtons = () => {
+  item.forEach(item => {
+    item.value.disabled = true;
+  });
 };
 
-const player = (button = ["paper", "scisors", "rock"]) => {
-  switch (button) {
-    case "paper":
-      display.innerHTML = `<img src="./asets/images/paper.png">`;
-      player_score = 1;
-      break;
-    case "scisors":
-      display.innerHTML = `<img src="./asets/images/scisors.png">`;
-      player_score = 2;
-      break;
-    case "rock":
-      display.innerHTML = `<img src="./asets/images/rock.png">`;
-      player_score = 3;
-      break;
-  };
+const enableButtons = () => {
+  item.forEach(item => {
+    item.value.disabled = false;
+  });
 };
 
-rock.onclick = () => {
-  let count = 0;
-  let score_player = 0;
-  let score_computer = 0;
-  compupter(comp = getRandom(1, 3));
-  player("rock");
-  if(compupter_score==1 && player_score==3){
-    score_computer = score_computer + count + 0;
-    score_player = score_player + count + 1;
-    counter.append(`Computer: ${score_computer}`);
-    display.append(`Player: ${score_player}`);
-  } else if (compupter_score == 2 && player_score == 3){
-    let count = 0;
-    score_computer = score_computer + count + 1;
-    score_player = score_player + count + 0;
-    counter.append(`Computer: ${score_computer}`);
-    display.append(`Player: ${score_player}`);
-  } else if (compupter_score == 3 && player_score == 3){
-    score_computer = score_computer + count + 0;
-    score_player = score_player + count + 0;
-    counter.append(`Computer: ${score_computer}`);
-    display.append(`Player: ${score_player}`);
+const computerPlay = () => {
+  return computerSelection[Math.floor(Math.random() * computerSelection.length)];
+};
+
+const playRound = (playerSelection, computerSelection) => {
+  if (playerSelection === computerSelection) {
+    return "Tie";
+  } else if (
+    (playerSelection === "rock" && computerSelection === "scisors") ||
+    (playerSelection === "scisors" && computerSelection === "paper") ||
+    (playerSelection === "paper" && computerSelection === "rock")
+  ) {
+    return "You Win";
+  } else {
+    return "You Lose";
   }
 };
 
-scisors.onclick = () => {
-  let count = 0;
-  let score_player = 0;
-  let score_computer = 0;
-  compupter(comp = getRandom(1, 3));
-  player("scisors");
-  if (compupter_score == 1 && player_score == 2) {
-    score_computer = score_computer + count + 0;
-    score_player = score_player + count + 1;
-    counter.append(`Computer: ${score_computer}`);
-    display.append(`Player: ${score_player}`);
-  } else if (compupter_score == 2 && player_score == 2) {
-    let count = 0;
-    score_computer = score_computer + count + 0;
-    score_player = score_player + count + 0;
-    counter.append(`Computer: ${score_computer}`);
-    display.append(`Player: ${score_player}`);
-  } else if (compupter_score == 3 && player_score == 2) {
-    score_computer = score_computer + count + 1;
-    score_player = score_player + count + 0;
-    counter.append(`Computer: ${score_computer}`);
-    display.append(`Player: ${score_player}`);
-  }
+const hideButton = () => {
+  reset.style.display = "none";
 };
 
-paper.onclick = () => {
-  let count = 0;
-  let score_player = 0;
-  let score_computer = 0;
-  compupter(comp = getRandom(1, 3));
-  player("paper");
-  if (compupter_score == 1 && player_score == 1) {
-    score_computer = score_computer + count + 0;
-    score_player = score_player + count + 0;
-    counter.append(`Computer: ${score_computer}`);
-    display.append(`Player: ${score_player}`);
-  } else if (compupter_score == 2 && player_score == 1) {
-    let count = 0;
-    score_computer = score_computer + count + 1;
-    score_player = score_player + count + 0;
-    counter.append(`Computer: ${score_computer}`);
-    display.append(`Player: ${score_player}`);
-  } else if (compupter_score == 3 && player_score == 1) {
-    score_computer = score_computer + count + 0;
-    score_player = score_player + count + 0;
-    counter.append(`Computer: ${score_computer}`);
-    display.append(`Player: ${score_player}`);
-  }
+const showButton = () => {
+  reset.style.display = "flex";
 };
+
+const game = () => {
+  hideButton();
+  item.forEach(item => {
+    item.value.addEventListener("click", () => {
+      const playerSelection = item.id;
+      const computerSelection = computerPlay();
+      const resultRound = playRound(playerSelection, computerSelection);
+      roundCounter++;
+      round.textContent = `Round: ${roundCounter}`;
+      if (resultRound === "You Win") {
+        playerScoreCounter++;
+      } else if (resultRound === "You Lose") {
+        computerScoreCounter++;
+      }
+      playerScore.textContent = `Player Score: ${playerScoreCounter}`;
+      computerScore.textContent = `Computer Score: ${computerScoreCounter}`;
+      display.innerHTML = `<img src="asets/images/${computerSelection}.png" alt="${computerSelection}" />`;
+      counter.innerHTML = `<img src="asets/images/${playerSelection}.png" alt="${playerSelection}" />`;
+      result.textContent = `${playerScoreCounter} - ${computerScoreCounter}`;
+      if (roundCounter === 5) {
+        showButton();
+        disableButtons();
+        if (playerScoreCounter > computerScoreCounter) {
+          result.textContent = `You Win!`;
+        } else if (playerScoreCounter < computerScoreCounter) {
+          result.textContent = `You Lose!`;
+        } else {
+          result.textContent = `It's a Tie!`;
+        }
+      }
+    });
+  });
+
+  reset.addEventListener("click", () => {
+    roundCounter = 0;
+    playerScoreCounter = 0;
+    computerScoreCounter = 0;
+    round.textContent = `Round: ${roundCounter}`;
+    playerScore.textContent = `Player Score: ${playerScoreCounter}`;
+    computerScore.textContent = `Computer Score: ${computerScoreCounter}`;
+    result.textContent = `${playerScoreCounter} - ${computerScoreCounter}`;
+    enableButtons();
+  });
+
+};
+
+game();

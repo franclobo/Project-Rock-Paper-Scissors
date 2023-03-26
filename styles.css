@@ -1,3 +1,18 @@
+:root {
+  --primary-color: #1d5b96;
+  --secondary-color: #fff;
+  --tertiary-color: #000;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("./asets/images/background.jpg");
+  background-size: cover;
+}
+
 header,
 #counter,
 #display {
@@ -7,15 +22,29 @@ header,
   align-items: center;
 }
 
-.title {
-  color: #1abccc;
+.title,
+.subtitle,
+footer {
+  color: var(--primary-color);
   text-align: center;
 }
+
 .buttons {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border: solid 3px var(--primary-color);
+  border-radius: 20px;
+  margin: 20px;
+  box-shadow: 0 8px 15px rgba(151, 188, 230, 0.3);
 }
 
 .img {
@@ -25,7 +54,39 @@ header,
 
 .game {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  gap: 20px;
+  gap: 50px;
 }
+
+.score{
+  display: flex;
+  justify-content: space-around;
+  align-items: space-around;
+  gap: 180px;
+}
+
+.reset {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+#result {
+  color: var(--primary-color);
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#playerScore,
+#computerScore,
+.round {
+  color: var(--primary-color);
+  font-size: 20px;
+  font-weight: bold;
+}
+

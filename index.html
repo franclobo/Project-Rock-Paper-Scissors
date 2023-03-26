@@ -15,22 +15,35 @@
     <h2 class="subtitle">
       First to score 5 points wins the game
     </h2>
+    <div id="round" class="round"></div>
   </header>
+  <div id="round"></div>
   <section class="game">
     <div id="counter"></div>
     <div id="display"></div>
   </section>
+  <section class="score">
+    <div id="playerScore"></div>
+    <div id="computerScore"></div>
+  </section>
   <section class="buttons">
-    <button type="button" id="rock">
+    <button type="button" id="rock" class="button">
       <img class="img" src="./asets/images/rock.png">
     </button>
-    <button type="button" id="scisors">
+    <button type="button" id="scisors" class="button">
       <img class="img" src="./asets/images/scisors.png">
     </button>
-    <button type="button" id="paper">
+    <button type="button" id="paper" class="button">
       <img class="img" src="./asets/images/paper.png">
     </button>
   </section>
+  <section class="result">
+    <div id="result"></div>
+  </section>
+  <button class="reset" type="reset" id="reset">Play Again</button>
+  <footer class="footer">
+    <p><small>&copy 2023</small> Created by Francisco Borja</p>
+  </footer>
   <script src="./script.js"></script>
 </body>
 </html>

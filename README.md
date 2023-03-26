@@ -1,11 +1,7 @@
 <a name="readme-top"></a>
 
 <div align="center">
-  <img src="./asets/images/logo.png" alt="logo" />
-  <br/>
-
   <h3><b>Rock, Scisors, Paper</b></h3>
-
 </div>
 
 <!-- TABLE OF CONTENTS -->
